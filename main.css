@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#list {
+    color: #3b3b3b;
+    box-shadow: 3, 3, 4 rgba(36, 38, 66, 0.787);
+    border: 1px solid rgba(36, 38, 66, 0.787);
+    width: 500px;
+    line-height: 50px;
+    font-weight: 800;
+}
+
+li{
+    transition: transform ease 0.3s;
+}
+
+li:hover {
+    transform: scale(1.07);
+    cursor: pointer;
+}
+
+.done {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
