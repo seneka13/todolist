@@ -1,30 +1,121 @@
 body {
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Baloo Tamma 2', cursive;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+}
+
+.form-place {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+    font-family: 'Baloo Tamma 2', cursive;
+}
+
+
+.list-style{
+    color: #3b3b3b;
+    box-shadow: 4px 6px 5px rgba(36, 38, 66, 0.787);
+    border: 1px solid rgba(36, 38, 66, 0.787);
+    max-width: 100%;
+    border-radius: 5px;
+    background-color: #fafafa;
+    padding: 20px;
 }
 
 #list {
-    color: #3b3b3b;
-    box-shadow: 3, 3, 4 rgba(36, 38, 66, 0.787);
-    border: 1px solid rgba(36, 38, 66, 0.787);
-    width: 500px;
-    line-height: 50px;
-    font-weight: 800;
+    font-family: 'Baloo Tamma 2', cursive;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 40px;
+}
+
+input{
+    border-radius: 5px;
+    outline: none;
+}
+
+textarea{
+    border-radius: 5px;
+}
+
+textarea, input:active {
+    outline: none;
+}
+
+.add-btn{
+    border-radius: 5px;
+    border: none;
+    background: #095a14;
+    color: wheat;
+    font-weight: bolder;
+    margin-top: 15px;
+    width: 170px;
+    height:50px;
+    box-shadow: 5px 5px 5px #095a14;
+    transition: transform ease 0.3s, box-shadow ease 0.3s
+}
+
+.add-btn:hover{
+    transform: translateX(5px);
+    box-shadow: none;
+    opacity: 0.9;
+}
+
+.btn-div {
+    width: 70px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.done-info{
+    width: 20px;
+    height: 20px;
+    background-color:red;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.del-btn{
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: url(./icon/cancel-svgrepo-com.svg);
+}
+
+.edit-btn:hover, .del-btn:hover, .done-info:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+
+.edit-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: url(./icon/edit-button-svgrepo-com.svg);
 }
 
 li{
     transition: transform ease 0.3s;
+    border: 1px solid #3d3d3d;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
 }
 
-li:hover {
-    transform: scale(1.07);
+.li-obj{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-text:hover {
+    opacity: 0.8;
     cursor: pointer;
 }
 
 .done {
-    text-decoration: line-through;
-    opacity: 0.6;
+    background: green;
 }

@@ -3,9 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./main.css" >
+<link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap" rel="stylesheet">
 </head>
 <body>
-    <ul id = "list"></ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <form class="list-style form-place" action="">
+                    <h1>Todo list</h1>
+                    <label for="">
+                        <input class="input-postname" type="text" placeholder="Enter post name">
+                    </label>
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Enter description"></textarea>
+                    <button class="add-btn">Add new post</button>
+                </form>
+            </div>
+            <div class="list-style col-6">
+                <ul id = "list"></ul>
+            </div>
+        </div>
+    </div>
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="./script.js"></script>
 </body>
