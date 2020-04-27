@@ -103,11 +103,18 @@ const renderTask = (task) => {
 
     if(task.done) doneInfo.classList.toggle('done');
     ul.appendChild(li)
-
+        
+        function getDoneInfo() {
+                if (task.done) {
+                    return  {'done': false}
+                } else {
+                    return {'done': true}
+                }
+            }
 
         doneInfo.onclick = () => {
-            fetchEditPost(task.id, {'done': true}).
-            then(window.location.reload())
+            fetchEditPost(task.id, getDoneInfo())
+            .then(window.location.reload())
         }
 
         editBtn.onclick = () => {
@@ -129,7 +136,7 @@ const renderTask = (task) => {
         .then(() => {
             const todolist = document.querySelectorAll('li');
             todolist.forEach(li => {
-                li.onclick = () => {
+                li.childNodes[0].childNodes[0].onclick = () => {
                 const id = li.getAttribute('data-number');
                 const desc = document.createElement('div');
 
@@ -159,3 +166,14 @@ const renderTask = (task) => {
                 alert('Заполните форму')
         }
     }
+
+
+
+    let i = function() {
+        if (1) {
+            return  '1'
+        } else {
+            return '2'
+        }}
+
+    console.log(i())
