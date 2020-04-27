@@ -48,6 +48,7 @@ const addBtn = document.querySelector('.add-btn')
 
 
 const fetchEditPost = (id, body) => {
+    console.log(body)
     return fetch(`http://localhost:3000/edit/${id}`, {
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
@@ -100,11 +101,17 @@ const renderTask = (task) => {
 
     li.appendChild(liObj)
 
-    if(task.done) doneInfo.classList.add('done');
+    if(task.done) doneInfo.classList.toggle('done');
     ul.appendChild(li)
 
+
+        doneInfo.onclick = () => {
+            fetchEditPost(task.id, {'done': true}).
+            then(window.location.reload())
+        }
+
         editBtn.onclick = () => {
-            // здесь я остановился, доделаю потом
+            fetchEditPost(task)
         }
 
         delBtn.onclick = () => {
@@ -113,8 +120,6 @@ const renderTask = (task) => {
         }
 
     }
-
-        
     
     fetch('http://localhost:3000/list')
     .then(response => response.json())
@@ -152,14 +157,5 @@ const renderTask = (task) => {
                     .then(() => window.location.reload())
             } else {
                 alert('Заполните форму')
-        }
-    }
-
-    const addPostToList = () => {
-        addBtn.onclick = () => {
-            fetchAddPost({
-                text: `${inputText.value}`,
-                description: `${textArea.value}`
-            })
         }
     }
