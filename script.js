@@ -36,7 +36,7 @@
         const fetchGetTaskList = () => {
             return fetch(`${endpoint}/list`)
                 .then(response => response.json())
-            };
+        };
 
         const fetchEditPost = (id, body) => {
             return fetch(`${endpoint}/edit/${id}`, {
@@ -69,7 +69,7 @@
                 console.log(key)
             })
         return elem
-        }
+        };
 
         const renderTask = (task, list) => {
             const li = createEl('li', null, {'data-number': task.id});
@@ -127,7 +127,7 @@
                 })
             }
 
-        }
+        };
 
         addBtn.onclick = () => {
             if (inputText.value && textArea.value) {
@@ -143,6 +143,6 @@
                 } else {
                 alert('Заполните форму')
             }
-        }
+        };
 
         renderTaskList()
