@@ -14,7 +14,17 @@ body {
 }
 
 
-.list-style{
+.list-div{
+    color: #3b3b3b;
+    box-shadow: 4px 6px 5px rgba(36, 38, 66, 0.787);
+    border: 1px solid rgba(36, 38, 66, 0.787);
+    max-width: 100%;
+    border-radius: 5px;
+    background-color: #fafafa;
+    padding: 20px;
+}
+
+.form-div{
     color: #3b3b3b;
     box-shadow: 4px 6px 5px rgba(36, 38, 66, 0.787);
     border: 1px solid rgba(36, 38, 66, 0.787);
@@ -34,6 +44,11 @@ body {
 input{
     border-radius: 5px;
     outline: none;
+}
+
+.edit-input{
+    height: 35px;
+    width: 180px;
 }
 
 textarea{
@@ -75,6 +90,7 @@ textarea, input:active {
     background-color:red;
     border: 1px solid black;
     border-radius: 50%;
+    transition: transform ease 0.4s;
 }
 
 .del-btn{
@@ -82,11 +98,13 @@ textarea, input:active {
     height: 20px;
     border: none;
     background: url(./icon/cancel-svgrepo-com.svg);
+    transition: transform ease 0.4s;
 }
 
 .edit-btn:hover, .del-btn:hover, .done-info:hover {
     cursor: pointer;
     transform: scale(1.1);
+    outline: none;
 }
 
 
@@ -95,6 +113,7 @@ textarea, input:active {
     height: 20px;
     border: none;
     background: url(./icon/edit-button-svgrepo-com.svg);
+    transition: transform ease 0.4s;
 }
 
 li{
@@ -109,6 +128,11 @@ li{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.desc{
+    font-size: 12px;
+    line-height: 12px;
 }
 
 .task-text:hover {
