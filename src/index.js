@@ -1,3 +1,4 @@
+
         const inputText = document.querySelector('.input-postname');
         const textArea = document.querySelector('textarea');
         const addBtn = document.querySelector('.add-btn');
@@ -15,7 +16,6 @@
                     li.childNodes[0].childNodes[0].onclick = () => {
                     const id = li.getAttribute('data-number');
                     const desc = createEl('div', null, {class: 'desc'});
-                    console.log(id)
     
                         fetch(`http://localhost:3000/list/${id}`)
                         .then(response => response.json())
@@ -58,15 +58,16 @@
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body)
             })
+            .then(response => {
+                if(!response.ok) throw new Error('Ошибка создания')
+            })
         };
 
         const createEl = (tag, text, atr = {}) => {
             const elem = document.createElement(tag);
             elem.textContent = text;
-            console.log(atr)
             Object.keys(atr).forEach((key) =>{
                 elem.setAttribute(key, atr[key])
-                console.log(key)
             })
         return elem
         };
@@ -126,23 +127,23 @@
                     renderTaskList()
                 })
             }
-
         };
 
         addBtn.onclick = () => {
-            if (inputText.value && textArea.value) {
                 fetchAddPost({
-                    text: `${inputText.value}`,
-                    description: `${textArea.value}`
+                    text: inputText.value,
+                    description: textArea.value
                     })
                     .then(()=> {
                         const list = document.querySelector('#list')
                         list.remove
                         renderTaskList()
                     })
-                } else {
-                alert('Заполните форму')
-            }
-        };
+                    .catch((err) => {
+                    const errMsg = createEl('div', err.message, {class : "error"});
+                    errMsg.textContent = err.message
+                    list.appendChild(errMsg)
+                    })
+                };
 
         renderTaskList()
