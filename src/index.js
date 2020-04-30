@@ -1,3 +1,4 @@
+import api from './api'
 
         const inputText = document.querySelector('.input-postname');
         const textArea = document.querySelector('textarea');
@@ -8,59 +9,13 @@
 
         const renderTaskList = () => {
             const list = createEl('ul', null, { id: 'list' });
-            fetchGetTaskList()
+            api.fetchGetTaskList()
             .then(taskList => taskList.forEach((item) => renderTask(item, list)))
-            .then(() => {
-                const todolist = document.querySelectorAll('li');
-                todolist.forEach(li => {
-                    li.childNodes[0].childNodes[0].onclick = () => {
-                    const id = li.getAttribute('data-number');
-                    const desc = createEl('div', null, {class: 'desc'});
-    
-                        fetch(`http://localhost:3000/list/${id}`)
-                        .then(response => response.json())
-                        .then(item => {
-                            if (!li.childNodes[1]) {
-                                desc.textContent = item.description;
-                                li.appendChild(desc);
-                                return;
-                            } else {
-                                li.removeChild(li.childNodes[1])
-                            }
-                        })
-                    }
-                })
+            .catch((err) => {
+                const errDiv = createEl('div', err.message, { class: 'error' })
+                list.appendChild(errDiv)
             })
-        };
-
-        const fetchGetTaskList = () => {
-            return fetch(`${endpoint}/list`)
-                .then(response => response.json())
-        };
-
-        const fetchEditPost = (id, body) => {
-            return fetch(`${endpoint}/edit/${id}`, {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
-            })
-        };
-
-        const fetchDeletePost = (id) => {
-            return fetch(`${endpoint}/delete/${id}`, {
-            method: 'DELETE'
-            })
-        };
-
-        const fetchAddPost = (body) => {
-            return fetch(`${endpoint}/add`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
-            })
-            .then(response => {
-                if(!response.ok) throw new Error('Ошибка создания')
-            })
+            
         };
 
         const createEl = (tag, text, atr = {}) => {
@@ -80,7 +35,6 @@
             const editBtn = createEl('button', null, {class: 'edit-btn'});
             const doneInfo = createEl('button', null, {class: 'done-info'});
             const btnDiv = createEl('div', null, {class: 'btn-div'})
-            console.log(list)
             btnDiv.appendChild(doneInfo);
             btnDiv.appendChild(editBtn);
             btnDiv.appendChild(delBtn);
@@ -98,7 +52,7 @@
             const getDoneInfo = task.done ? {'done': false} : {'done': true}
             
             doneInfo.onclick = () => {
-                fetchEditPost(task.id, getDoneInfo)
+                api.fetchEditPost(task.id, getDoneInfo)
                 .then(() => {
                     list.remove()
                     renderTaskList()
@@ -113,37 +67,59 @@
                 liObj.insertBefore(input, taskText)
                 liObj.removeChild(taskText)
                 input.addEventListener('blur', () => {
-                fetchEditPost(task.id, { text: input.value })
+                api.fetchEditPost(task.id, { text: input.value })
                 .then(() => {
                     list.remove()
                     renderTaskList()
                 })
             })}
 
-            delBtn.onclick = () => {
-                fetchDeletePost(`${task.id}`)
+            delBtn.addEventListener('click', () => {
+                api.fetchDeletePost(`${task.id}`)
                 .then(() => {
                     list.remove()
                     renderTaskList()
                 })
-            }
+            })
+
+
+            // .then(() => {
+            //     const todolist = document.querySelectorAll('li');
+            //     todolist.forEach(li => {
+            //         li.childNodes[0].childNodes[0].onclick = () => {
+            //         const id = li.getAttribute('data-number');
+            //         const desc = createEl('div', null, {class: 'desc'});
+    
+            //             fetch(`http://localhost:3000/list/${id}`)
+            //             .then(response => response.json())
+            //             .then(item => {
+            //                 if (!li.childNodes[1]) {
+            //                     desc.textContent = item.description;
+            //                     li.appendChild(desc);
+            //                     return;
+            //                 } else {
+            //                     li.removeChild(li.childNodes[1])
+            //                 }
+            //             })
+            //         }
+            //     })
+            // })
         };
 
-        addBtn.onclick = () => {
-                fetchAddPost({
+        const errMsg = createEl('div', null, {class : "error"})
+
+        addBtn.addEventListener('click', () => {
+                api.fetchAddPost({
                     text: inputText.value,
-                    description: textArea.value
-                    })
+                    description: textArea.value})
                     .then(()=> {
                         const list = document.querySelector('#list')
-                        list.remove
-                        renderTaskList()
-                    })
-                    .catch((err) => {
-                    const errMsg = createEl('div', err.message, {class : "error"});
-                    errMsg.textContent = err.message
-                    list.appendChild(errMsg)
-                    })
-                };
+                        list.remove()
+                        renderTaskList()})
+                        .catch((err) => {
+                            errMsg.textContent = err.message
+                            list.appendChild(errMsg)
+                        })
+                });
 
         renderTaskList()
