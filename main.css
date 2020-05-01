@@ -14,7 +14,7 @@ body {
 }
 
 
-.list-div{
+.list-div {
     color: #3b3b3b;
     box-shadow: 4px 6px 5px rgba(36, 38, 66, 0.787);
     border: 1px solid rgba(36, 38, 66, 0.787);
@@ -24,7 +24,7 @@ body {
     padding: 20px;
 }
 
-.form-div{
+.form-div {
     color: #3b3b3b;
     box-shadow: 4px 6px 5px rgba(36, 38, 66, 0.787);
     border: 1px solid rgba(36, 38, 66, 0.787);
@@ -41,26 +41,27 @@ body {
     line-height: 40px;
 }
 
-input{
+input {
     border-radius: 5px;
     outline: none;
 }
 
-.edit-input{
+.edit-input {
     height: 35px;
     width: 180px;
 }
 
-textarea{
+textarea {
     border-radius: 5px;
 }
 
-textarea, input:active {
+textarea,
+input:active {
     outline: none;
 }
 
 
-.error{
+.error {
     position: absolute;
     top: 50%;
     right: 60%;
@@ -75,7 +76,7 @@ textarea, input:active {
     opacity: 0.9;
 }
 
-.add-btn{
+.add-btn {
     border-radius: 5px;
     border: none;
     background: #095a14;
@@ -83,12 +84,12 @@ textarea, input:active {
     font-weight: bolder;
     margin-top: 15px;
     width: 170px;
-    height:50px;
+    height: 50px;
     box-shadow: 5px 5px 5px #095a14;
     transition: transform ease 0.3s, box-shadow ease 0.3s
 }
 
-.add-btn:hover{
+.add-btn:hover {
     transform: translateX(5px);
     box-shadow: none;
     opacity: 0.9;
@@ -100,16 +101,16 @@ textarea, input:active {
     justify-content: space-between;
 }
 
-.done-info{
+.done-info {
     width: 20px;
     height: 20px;
-    background-color:red;
+    background-color: red;
     border: 1px solid black;
     border-radius: 50%;
     transition: transform ease 0.4s;
 }
 
-.del-btn{
+.del-btn {
     width: 20px;
     height: 20px;
     border: none;
@@ -117,7 +118,9 @@ textarea, input:active {
     transition: transform ease 0.4s;
 }
 
-.edit-btn:hover, .del-btn:hover, .done-info:hover {
+.edit-btn:hover,
+.del-btn:hover,
+.done-info:hover {
     cursor: pointer;
     transform: scale(1.1);
     outline: none;
@@ -132,7 +135,7 @@ textarea, input:active {
     transition: transform ease 0.4s;
 }
 
-li{
+li {
     transition: transform ease 0.3s;
     border: 1px solid #3d3d3d;
     border-radius: 10px;
@@ -140,13 +143,13 @@ li{
     margin-bottom: 5px;
 }
 
-.li-obj{
+.li-obj {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.desc{
+.desc {
     font-size: 12px;
     line-height: 12px;
 }
