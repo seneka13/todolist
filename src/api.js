@@ -16,7 +16,7 @@ export default {
     fetchGetTaskList: () => {
         return fetch(`${endpoint}/list`)
             .then(response => {
-                if(!response.ok) throw new Error("Ошибка загрузки")
+                if(!response.ok) throw new Error("Ошибка загрузки") //вот этот
                 return response.json()
         })
     },
@@ -32,7 +32,9 @@ export default {
     fetchDeletePost: (id) => {
         return fetch(`${endpoint}/delete/${id}`, {
         method: 'DELETE'
+        }).then(response => {
+            if (!response.ok) throw new Error('Ошибка удаления')
         })
-    }
+    },
 }
 

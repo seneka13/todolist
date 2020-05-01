@@ -1,30 +1,21 @@
 import api from './api'
+import { createEl } from './func'
 
         const inputText = document.querySelector('.input-postname');
         const textArea = document.querySelector('textarea');
         const addBtn = document.querySelector('.add-btn');
         const listDiv = document.querySelector('.list-div');
-        const endpoint = 'http://localhost:3000';
-
+        const errMsg = createEl('div', null, {class : "error"});
 
         const renderTaskList = () => {
             const list = createEl('ul', null, { id: 'list' });
             api.fetchGetTaskList()
             .then(taskList => taskList.forEach((item) => renderTask(item, list)))
             .catch((err) => {
-                const errDiv = createEl('div', err.message, { class: 'error' })
-                list.appendChild(errDiv)
+                console.log(err)
+                const divErr = createEl('div', err.message, {class : "error"}) //Почему то не выходит тот текст ошибки который я посылаю в api
+                list.appendChild(divErr)
             })
-            
-        };
-
-        const createEl = (tag, text, atr = {}) => {
-            const elem = document.createElement(tag);
-            elem.textContent = text;
-            Object.keys(atr).forEach((key) =>{
-                elem.setAttribute(key, atr[key])
-            })
-        return elem
         };
 
         const renderTask = (task, list) => {
@@ -59,7 +50,7 @@ import api from './api'
                 })
             }
 
-            editBtn.onclick = () => {
+            editBtn.addEventListener('click', () => {
                 const input = createEl('input', null, {class: 'edit-input'})
                 input.type = 'text'
                 input.value = task.text
@@ -72,7 +63,7 @@ import api from './api'
                     list.remove()
                     renderTaskList()
                 })
-            })}
+            })})
 
             delBtn.addEventListener('click', () => {
                 api.fetchDeletePost(`${task.id}`)
@@ -83,30 +74,27 @@ import api from './api'
             })
 
 
-            // .then(() => {
-            //     const todolist = document.querySelectorAll('li');
-            //     todolist.forEach(li => {
-            //         li.childNodes[0].childNodes[0].onclick = () => {
-            //         const id = li.getAttribute('data-number');
-            //         const desc = createEl('div', null, {class: 'desc'});
-    
-            //             fetch(`http://localhost:3000/list/${id}`)
-            //             .then(response => response.json())
-            //             .then(item => {
-            //                 if (!li.childNodes[1]) {
-            //                     desc.textContent = item.description;
-            //                     li.appendChild(desc);
-            //                     return;
-            //                 } else {
-            //                     li.removeChild(li.childNodes[1])
-            //                 }
-            //             })
-            //         }
-            //     })
-            // })
+        const todolist = document.querySelectorAll('li');
+        todolist.forEach(li => { 
+            li.childNodes[0].childNodes[0].onclick = () => {
+            const id = li.getAttribute('data-number');
+            const desc = createEl('div', null, {class: 'desc'});
+
+                fetch(`http://localhost:3000/list/${id}`)
+                .then(response => response.json())
+                .then(item => {
+                    if (!li.childNodes[1]) {
+                        desc.textContent = item.description;
+                        li.appendChild(desc);
+                        return;
+                    } else {
+                        li.removeChild(li.childNodes[1])
+                    }
+                })
+            }
+        })
         };
 
-        const errMsg = createEl('div', null, {class : "error"})
 
         addBtn.addEventListener('click', () => {
                 api.fetchAddPost({
