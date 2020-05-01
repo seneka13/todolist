@@ -31,6 +31,9 @@ export default {
             },
             body: JSON.stringify(body)
         })
+        .then(response => {
+            if (!response.ok) throw new Error('Ошибка изменения')
+        })
     },
 
     fetchDeletePost: (id) => {

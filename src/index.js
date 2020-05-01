@@ -1,7 +1,7 @@
 import api from './api'
 import {
     createEl
-} from './func'
+} from './creators'
 
 const inputText = document.querySelector('.input-postname');
 const textArea = document.querySelector('textarea');

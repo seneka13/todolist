@@ -2,9 +2,8 @@
   "name": "todolist",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development --port 3001",
     "build": "webpack --mode production"
 
