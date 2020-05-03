@@ -1,33 +1,88 @@
-<!DOCTYPE html>
-<html lang="ru">
+    <!DOCTYPE html>
+    <html lang="ru">
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./styles/main.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    </head>
 
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <form class="form-div form-place" action="">
-                    <h1>Todo list</h1>
-                    <label for="">
-                        <input class="input-postname" type="text" placeholder="Enter post name">
-                    </label>
-                    <textarea name="" id="" cols="30" rows="10" placeholder="Enter description"></textarea>
-                    <button class="add-btn" type="button">Add new post</button>
-                </form>
+    <body>
+        <section class="body">
+            <div class="container">
+                <h1 class="title">Todo list</h1>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-6">
+                        <div class="block">
+                            <form class="form" action="">
+                                <h3 class="form__title">Создать заметку</h3>
+                                <label>
+                                    <input class="form__input" type="text" placeholder="Название заметки*">
+                                </label>
+                                <textarea class="form__textarea" name="" id="" cols="30" rows="10"
+                                    placeholder="Введите описание"></textarea>
+                                <div class="color-choice">
+                                    <p>Цвет фона:</p>
+                                    <div class="color">
+                                        <label>
+                                            <input type="radio" name="color">
+                                            <div class="color__check white"></div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="color__check">
+                                            <div class="color__check pink"></div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="color__check">
+                                            <div class="color__check skyblue"></div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="color__check">
+                                            <div class="color__check green"></div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="color__check">
+                                            <div class="color__check orange"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button class="form__btn" type="button">Создать</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-6 pl-lg-5">
+                        <div class="stat">
+                            <h2 class="stat__title">Статистика по заметкам</h2>
+                            <div class="stat__bar">
+                                <div class="stat__open">
+                                    <span>открытых: 14 заметок</span>
+                                    <div class="open-bar">
+                                        <div class="open__line"></div>
+                                    </div>
+                                </div>
+                                <div class="stat__close">
+                                    <span>закрытых: 76 заметок</span>
+                                    <div class="close-bar">
+                                        <div class="close__line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="list-div col-6">
+            <div class="container">
+                <div class="row">
+                    <div class="list-cont">
 
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-    <script src="./dist/main.js"></script>
-</body>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+        <script src="./dist/main.js"></script>
+    </body>
 
-</html>
+    </html>

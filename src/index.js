@@ -3,13 +3,14 @@ import {
     createEl
 } from './creators'
 
-const inputText = document.querySelector('.input-postname');
-const textArea = document.querySelector('textarea');
-const addBtn = document.querySelector('.add-btn');
-const listDiv = document.querySelector('.list-div');
+const inputText = document.querySelector('.form__input');
+const textArea = document.querySelector('.form__textarea');
+const addBtn = document.querySelector('.form__btn');
+const listCont = document.querySelector('.list-cont');
 const errMsg = createEl('div', null, {
     class: "error"
 });
+const colorInput = document.querySelectorAll('input[type = "radio"]')
 
 const renderTaskList = () => {
     const list = createEl('ul', null, {
@@ -21,20 +22,21 @@ const renderTaskList = () => {
             console.log(err.message)
             const divErr = createEl('div', err.message, {
                 class: "error"
-            }) 
-            listDiv.appendChild(divErr)
+            })
+            listCont.appendChild(divErr)
         })
 };
 
 const renderTask = (task, list) => {
     const li = createEl('li', null, {
-        'data-number': task.id
+        'data-number': task.id,
+        class: "col-12 col-md-6 col-lg-3 mb-4"
     });
     const liObj = createEl('div', null, {
-        class: 'li-obj'
+        class: 'li-obj block'
     })
-    const taskText = createEl('div', task.text, {
-        class: 'task-text'
+    const taskName = createEl('div', task.text, {
+        class: 'task-name'
     });
     const delBtn = createEl('button', null, {
         class: 'del-btn'
@@ -43,23 +45,23 @@ const renderTask = (task, list) => {
         class: 'edit-btn'
     });
     const doneInfo = createEl('button', null, {
-        class: 'done-info'
+        class: 'done-btn'
     });
-    const btnDiv = createEl('div', null, {
-        class: 'btn-div'
+    const taskDesc = createEl('div', task.description, {
+        class: 'task-desc'
     })
-    btnDiv.appendChild(doneInfo);
-    btnDiv.appendChild(editBtn);
-    btnDiv.appendChild(delBtn);
 
-    liObj.appendChild(taskText)
-    liObj.appendChild(btnDiv)
+    liObj.appendChild(taskDesc)
+    liObj.appendChild(doneInfo);
+    liObj.appendChild(delBtn);
+
+    liObj.appendChild(taskName)
 
     li.appendChild(liObj)
 
     if (task.done) doneInfo.classList.toggle('done');
 
-    listDiv.appendChild(list)
+    listCont.appendChild(list)
     list.appendChild(li)
 
     const getDoneInfo = task.done ? {
@@ -76,15 +78,15 @@ const renderTask = (task, list) => {
             })
     }
 
-    editBtn.addEventListener('click', () => {
+    taskName.addEventListener('click', () => {
         const input = createEl('input', null, {
             class: 'edit-input'
         })
         input.type = 'text'
         input.value = task.text
         editBtn.disabled = true
-        liObj.insertBefore(input, taskText)
-        liObj.removeChild(taskText)
+        liObj.insertBefore(input, taskName)
+        liObj.removeChild(taskName)
         input.addEventListener('blur', () => {
             api.fetchEditPost(task.id, {
                     text: input.value
@@ -103,29 +105,6 @@ const renderTask = (task, list) => {
                 renderTaskList()
             })
     })
-
-
-    const todolist = document.querySelectorAll('li');
-    todolist.forEach(li => {
-        li.childNodes[0].childNodes[0].onclick = () => {
-            const id = li.getAttribute('data-number');
-            const desc = createEl('div', null, {
-                class: 'desc'
-            });
-
-            fetch(`http://localhost:3000/list/${id}`)
-                .then(response => response.json())
-                .then(item => {
-                    if (!li.childNodes[1]) {
-                        desc.textContent = item.description;
-                        li.appendChild(desc);
-                        return;
-                    } else {
-                        li.removeChild(li.childNodes[1])
-                    }
-                })
-        }
-    })
 };
 
 
@@ -143,6 +122,8 @@ addBtn.addEventListener('click', () => {
             errMsg.textContent = err.message
             list.appendChild(errMsg)
         })
+    inputText.value = '';
+    textArea.value = ''
 });
 
 renderTaskList()

@@ -1,0 +1,48 @@
+@import url(./form.css);
+@import url(./color-choice.css);
+@import url(./stat-style.css);
+@import url(./tasklist.css);
+
+:root{
+    --white: #ffffff;
+    --beige: #FFFBE3;
+    --lightblue: #92AED9;
+    --black: #333333;
+    --lightpink: #FFD2D2;
+    --skyblue:#D3D2FF;
+    --lightgreen:#D7FDD1;
+    --lightorange:#F8E1B6;
+    --malachite:#57AD56;
+    --gray:#D8D8D8;
+}
+
+body {
+    margin: 0px;
+}
+
+h1, h2, h3, p{
+    margin: 0px;
+}
+
+.body{
+    background: var(--lightblue);
+    min-height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    padding: 50px;
+}
+
+
+.block{
+    background: var(--beige);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.title{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 61px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 40px;
+}
