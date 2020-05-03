@@ -28,6 +28,14 @@ li {
         "clr clr del";
 }
 
+.edit-input{
+    width: 200%;
+}
+
+.edit-textarea {
+    width: 300%;
+}
+
 .task-name {
     grid-area: task;
     font-weight: 600;

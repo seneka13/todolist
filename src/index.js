@@ -30,17 +30,23 @@ const renderTaskList = () => {
         })
 };
 
+
+// listCont.innerHTML = ('<div class="exist-info"><img src="./icon/info.svg" alt=""><span></span></div>')
+
+// colorInput.forEach((item)=> {
+//     item.getAttribute
+// })
+
+
 const renderTask = (task, list) => {
 
-    // list.textContent = "заметок пока нет" ? !list.hasChildNodes() : ''
-    console.log(!list.hasChildNodes())
     const li = createEl('li', null, {
         'data-number': task.id,
         class: "col-12 col-md-6 col-lg-3 mb-4"
     });
     const liObj = createEl('div', null, {
         class: 'li-obj block'
-    })
+    });
     const taskName = createEl('div', task.text, {
         class: 'task-name'
     });
@@ -55,7 +61,7 @@ const renderTask = (task, list) => {
     });
     const taskDesc = createEl('div', task.description, {
         class: 'task-desc'
-    })
+    });
 
     liObj.appendChild(taskDesc)
     liObj.appendChild(doneBtn);
@@ -86,9 +92,7 @@ const renderTask = (task, list) => {
     }
 
     taskName.addEventListener('click', () => {
-        const input = createEl('input', null, {
-            class: 'edit-input'
-        })
+        const input = createEl('input', null, {class: 'task-name'})
         input.type = 'text'
         input.value = task.text
         editBtn.disabled = true
@@ -97,6 +101,23 @@ const renderTask = (task, list) => {
         input.addEventListener('blur', () => {
             api.fetchEditPost(task.id, {
                     text: input.value
+                })
+                .then(() => {
+                    list.remove()
+                    renderTaskList()
+                })
+        })
+    })
+
+
+    taskDesc.addEventListener('click', () => {
+        const textArea = createEl('textarea', null, {class: 'task-desc'})
+        textArea.value = task.description
+        liObj.insertBefore(textArea, taskDesc)
+        liObj.removeChild(taskDesc)
+        textArea.addEventListener('blur', () => {
+            api.fetchEditPost(task.id, {
+                    description: textArea.value
                 })
                 .then(() => {
                     list.remove()
