@@ -70,3 +70,14 @@ li {
     height: 30px;
     background: url('../icon/basket.svg');
 }
+
+.exist-info {
+    width: 100%;
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.exist-info img {
+    margin-right: 14px;
+}

@@ -19,6 +19,7 @@ const renderTaskList = () => {
         id: 'list'
     });
     listCont.appendChild(list)
+    list.innerHTML = ('<div class="exist-info"><img src="./icon/info.svg" alt=""><span>заметок пока нет</span></div>')
     api.fetchGetTaskList()
         .then(taskList => taskList.forEach((item) => renderTask(item, list)))
         .catch((err) => {
@@ -31,14 +32,17 @@ const renderTaskList = () => {
 };
 
 
-// listCont.innerHTML = ('<div class="exist-info"><img src="./icon/info.svg" alt=""><span></span></div>')
-
-// colorInput.forEach((item)=> {
-//     item.getAttribute
-// })
+colorInput.forEach((item)=> {
+    item.getAttribute
+})
 
 
 const renderTask = (task, list) => {
+    const existInfo = document.querySelector('.exist-info')
+    if (existInfo) {
+        existInfo.remove()
+    }
+    
 
     const li = createEl('li', null, {
         'data-number': task.id,
