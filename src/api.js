@@ -11,7 +11,7 @@ export default {
                 body: JSON.stringify(body)
             })
             .then(response => {
-                if (!response.ok) throw new Error('Ошибка создания')
+                if (!response.ok) throw new Error('не удалось создать заметку')
             })
     },
 

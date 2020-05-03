@@ -46,3 +46,18 @@ h1, h2, h3, p{
     color: var(--white);
     margin-bottom: 40px;
 }
+
+
+.error-msg{
+    display: flex;
+    margin: 20px 0px;
+}
+
+.error {
+    padding-left: 5px;
+    color: #B01E1E;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+}
+
