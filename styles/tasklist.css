@@ -71,6 +71,10 @@ li {
     background: url('../icon/basket.svg');
 }
 
+.color {
+    grid-area: clr;
+}
+
 .exist-info {
     width: 100%;
     margin-top: 150px;

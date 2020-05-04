@@ -1,7 +1,8 @@
 import api from './api'
 import {
     createEl
-} from './creators'
+} from './creators';
+import {getColorInput} from './color';
 
 const inputText = document.querySelector('.form__input');
 const textArea = document.querySelector('.form__textarea');
@@ -10,9 +11,8 @@ const listCont = document.querySelector('.list-cont');
 const errorCont = document.querySelector('.error-cont')
 const errorMsg = createEl('div', null, {class:"error-msg"})
 const errorText = createEl('div', null, {class: "error"});
-const errImg = createEl('img', null, {class:'error-img'});
-errImg.src = '../icon/error.svg';
-const colorInput = document.querySelectorAll('input[type = "radio"]');
+const errImg = createEl('img', null, {class:'error-img', src:'../icon/error.svg'});
+
 
 const renderTaskList = () => {
     const list = createEl('ul', null, {
@@ -32,20 +32,16 @@ const renderTaskList = () => {
 };
 
 
-colorInput.forEach((item)=> {
-    item.getAttribute
-})
-
 
 const renderTask = (task, list) => {
     const existInfo = document.querySelector('.exist-info')
-    if (existInfo) {
-        existInfo.remove()
-    }
-    
+    if (existInfo) existInfo.remove()
+
+    const colorChoice = getColorInput()
+    console.log(colorChoice)
+
 
     const li = createEl('li', null, {
-        'data-number': task.id,
         class: "col-12 col-md-6 col-lg-3 mb-4"
     });
     const liObj = createEl('div', null, {
@@ -70,30 +66,24 @@ const renderTask = (task, list) => {
     liObj.appendChild(taskDesc)
     liObj.appendChild(doneBtn);
     liObj.appendChild(delBtn);
-
     liObj.appendChild(taskName)
+    liObj.appendChild(colorChoice)
 
     li.appendChild(liObj)
 
     if (task.done) doneBtn.classList.toggle('done');
-
-    listCont.appendChild(list)
     list.appendChild(li)
-
-    const getDoneInfo = task.done ? {
-        'done': false
-    } : {
-        'done': true
-    }
+    listCont.appendChild(list)
+    
 
     
-    doneBtn.onclick = () => {
-        api.fetchEditPost(task.id, getDoneInfo)
+    doneBtn.addEventListener('click', () => {
+        api.fetchEditPost(task.id, { done: !task.done })
             .then(() => {
                 list.remove()
                 renderTaskList()
             })
-    }
+    })
 
     taskName.addEventListener('click', () => {
         const input = createEl('input', null, {class: 'task-name'})

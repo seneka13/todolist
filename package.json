@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --port 3001",
     "build": "webpack --mode production"
-
   },
   "repository": {
     "type": "git",
@@ -20,7 +19,8 @@
   },
   "homepage": "https://github.com/seneka13/todolist#readme",
   "dependencies": {
-    "bootstrap": "^4.4.1"
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
