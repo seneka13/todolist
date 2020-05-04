@@ -1,0 +1,49 @@
+.color-choice{
+    display: flex;
+    justify-content: space-between;
+    margin: 27px 0px 15px 0px;
+    color: var(--black);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    width: 250px;
+}
+
+input[type="radio"] {
+    position: absolute;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+}
+
+label:hover{
+    cursor: pointer;
+}
+
+.color__check{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.white{
+    background: var(--sdsa);
+    border: 2px solid var(--black);
+}
+
+.pink{
+    background: var(--lightpink);
+}
+
+.skyblue{
+    background: var(--skyblue);
+}
+
+.green{
+    background: var(--lightgreen);
+}
+
+.orange {
+    background: var(--lightorange);
+}

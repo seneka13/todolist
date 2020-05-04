@@ -1,0 +1,44 @@
+.stat{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 331px;
+}
+
+.stat__title{
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 34px;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.stat__bar{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 15px 0px;
+    border-left: 3px solid var(--black);
+}
+
+.open-bar{
+    width: auto;
+    height: 34px;
+    background: var(--white);
+}
+
+.close-bar{
+    width: auto;
+    height: 34px;
+    background: var(--white);
+}
+
+span {
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding-left: 5px;
+}

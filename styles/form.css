@@ -1,0 +1,39 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    font-family:'Montserrat', sans-serif;;
+}
+
+.form__title{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 20px;
+}
+
+.form__input{
+    border: 1px solid #C5C5C5;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px;
+}
+
+.form__textarea{
+    border: 1px solid #C5C5C5;
+    box-sizing: border-box;
+    height: 107px;
+    padding: 5px;
+}
+
+.form__btn {
+    width: 182px;
+    height: 42px;
+    background: var(--malachite);
+    border: none;
+    color: var(--white);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+}
