@@ -154,9 +154,8 @@ const renderTask = (task, list) => {
                 done: !task.done
             })
             .then(() => {
-                // list.remove()
-                // renderTaskList()
-                window.location.reload() //здесь пока поставил reload, чтобы после клика статистика обновлялась. Пока не  нашел другого способа
+                list.remove()
+                renderTaskList()
             })
     })
 
@@ -203,9 +202,8 @@ const renderTask = (task, list) => {
     delBtn.addEventListener('click', () => {
         api.fetchDeletePost(`${task.id}`)
             .then(() => {
-                // list.remove()
-                // renderTaskList()
-                window.location.reload() //Тоже самое что и с doneBtn, для обновления статистики
+                list.remove()
+                renderTaskList()
             })
     })
 };
@@ -217,11 +215,10 @@ addBtn.addEventListener('click', () => {
             description: textArea.value
         })
         .then(() => {
-            // const list = document.querySelector('#list')
-            // list.remove()
+            const list = document.querySelector('#list')
+            list.remove()
             errorMsg.remove()
-            // renderTaskList()
-            window.location.reload()
+            renderTaskList()
         })
         .catch((err) => {
             errorMsg.appendChild(errImg);
