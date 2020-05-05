@@ -56,10 +56,15 @@ li {
     width: 30px;
     height: 30px;
     background: url('../icon/done.svg');
+    transition: transform ease 0.2s;
 }
 
 .done{
     background: url('../icon/done-green.svg');
+}
+
+.done-btn:hover{
+    transform: scale(1.1);
 }
 
 .del-btn {
@@ -68,10 +73,12 @@ li {
     width: 30px;
     height: 30px;
     background: url('../icon/basket.svg');
+    transition: transform ease 0.2s;
 }
 
 .del-btn:hover{
     background: url('../icon/basket-red.svg');
+    transform: scale(1.1);
 }
 
 .color {

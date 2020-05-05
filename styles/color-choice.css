@@ -34,6 +34,7 @@ input[type="radio"]:checked + div {
     width: 24px;
     height: 24px;
     border-radius: 50%;
+    transition: transform ease 0.3s;
 }
 
 .color-pick{
@@ -41,6 +42,11 @@ input[type="radio"]:checked + div {
     height: 20px;
     border-radius: 50%;
     margin-right: 3px;
+    transition: transform ease 0.3s;
+}
+
+.color-pick:hover, .color__check:hover{
+    transform: scale(1.1);
 }
 
 .white{

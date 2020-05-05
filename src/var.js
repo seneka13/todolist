@@ -24,3 +24,4 @@ export const colorArr = {
     green: 'var(--lightgreen)',
     orange: 'var(--lightorange)'
 }
+
