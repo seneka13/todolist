@@ -36,7 +36,7 @@ const renderTaskList = () => {
     });
     listCont.appendChild(list)
     list.innerHTML = ('<div class="exist-info"><img src="./icon/info.svg" alt=""><span>заметок пока нет</span></div>');
-    statBar.innerHTML = ('<div class="stat-info"><img src="./icon/info.svg" alt=""><span>заметок пока нет</span></div>');
+    statBar.innerHTML = ('<div class="stat-info"><span>заметок пока нет</span></div>');
     api.fetchGetTaskList()
         .then(taskList => taskList.forEach((item) => renderTask(item, list)))
         .catch((err) => {
@@ -73,7 +73,7 @@ const renderTask = (task, list) => {
         <div class="close__line"></div>
     </div>`)
 
-        api.fetchGetStatistics()
+    api.fetchGetStatistics()
         .then(stat => {
             const openLine = document.querySelector('.open__line');
             const closeLine = document.querySelector('.close__line');
@@ -195,7 +195,7 @@ const renderTask = (task, list) => {
                 .then(() => {
                     list.remove()
                     renderTaskList()
-                    
+
                 })
         })
     })

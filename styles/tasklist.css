@@ -87,8 +87,7 @@ li {
 
 .stat-info {
     width: 100%;
-    display: flex;
-    justify-content: center;
+    padding-left: 20px;
 }
 
 .exist-info img {
