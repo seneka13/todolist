@@ -3,31 +3,9 @@ import {
     createEl,
     findParent
 } from './support';
-
-const inputText = document.querySelector('.form__input');
-const textArea = document.querySelector('.form__textarea');
-const addBtn = document.querySelector('.form__btn');
-const listCont = document.querySelector('.list-cont');
-const errorCont = document.querySelector('.error-cont');
-const statBar = document.querySelector('.stat__bar')
-const errorMsg = createEl('div', null, {
-    class: "error-msg"
-})
-const errorText = createEl('div', null, {
-    class: "error"
-});
-const errImg = createEl('img', null, {
-    class: 'error-img',
-    src: '../icon/error.svg'
-});
-const formColor = document.getElementsByName('color__check')
-const colorArr = {
-    white: 'var(--beige)',
-    pink: 'var(--lightpink)',
-    skyblue: 'var(--skyblue)',
-    green: 'var(--lightgreen)',
-    orange: 'var(--lightorange)'
-}
+import {
+    inputText, textArea, addBtn, listCont, errorCont, statBar, errorMsg, errorText, errImg, formColor, colorArr
+} from './var'
 
 
 const renderTaskList = () => {
