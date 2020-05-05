@@ -1,7 +1,7 @@
-@import url(./form.css);
-@import url(./color-choice.css);
-@import url(./stat-style.css);
-@import url(./tasklist.css);
+@import './form.css';
+@import './color-choice.css';
+@import './stat-style.css';
+@import './tasklist.css';
 
 :root{
     --white: #ffffff;
@@ -14,6 +14,7 @@
     --lightorange:#F8E1B6;
     --malachite:#57AD56;
     --gray:#D8D8D8;
+    --blood:#B01E1E;
 }
 
 body {
@@ -55,7 +56,7 @@ h1, h2, h3, p{
 
 .error {
     padding-left: 5px;
-    color: #B01E1E;
+    color: var(--blood);
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;

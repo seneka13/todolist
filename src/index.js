@@ -1,17 +1,33 @@
 import api from './api'
 import {
-    createEl
-} from './creators';
-import {getColorInput} from './color';
+    createEl,
+    findParent
+} from './support';
 
 const inputText = document.querySelector('.form__input');
 const textArea = document.querySelector('.form__textarea');
 const addBtn = document.querySelector('.form__btn');
 const listCont = document.querySelector('.list-cont');
-const errorCont = document.querySelector('.error-cont')
-const errorMsg = createEl('div', null, {class:"error-msg"})
-const errorText = createEl('div', null, {class: "error"});
-const errImg = createEl('img', null, {class:'error-img', src:'../icon/error.svg'});
+const errorCont = document.querySelector('.error-cont');
+const statBar = document.querySelector('.stat__bar')
+const errorMsg = createEl('div', null, {
+    class: "error-msg"
+})
+const errorText = createEl('div', null, {
+    class: "error"
+});
+const errImg = createEl('img', null, {
+    class: 'error-img',
+    src: '../icon/error.svg'
+});
+const formColor = document.getElementsByName('color__check')
+const colorArr = {
+    white: 'var(--beige)',
+    pink: 'var(--lightpink)',
+    skyblue: 'var(--skyblue)',
+    green: 'var(--lightgreen)',
+    orange: 'var(--lightorange)'
+}
 
 
 const renderTaskList = () => {
@@ -19,7 +35,8 @@ const renderTaskList = () => {
         id: 'list'
     });
     listCont.appendChild(list)
-    list.innerHTML = ('<div class="exist-info"><img src="./icon/info.svg" alt=""><span>заметок пока нет</span></div>')
+    list.innerHTML = ('<div class="exist-info"><img src="./icon/info.svg" alt=""><span>заметок пока нет</span></div>');
+    statBar.innerHTML = ('<div class="stat-info"><img src="./icon/info.svg" alt=""><span>заметок пока нет</span></div>');
     api.fetchGetTaskList()
         .then(taskList => taskList.forEach((item) => renderTask(item, list)))
         .catch((err) => {
@@ -32,14 +49,68 @@ const renderTaskList = () => {
 };
 
 
+formColor.forEach((clrPick) => {
+    if (clrPick.value === 'var(--beige)') {
+        clrPick.checked = true;
+    }
+    clrPick.addEventListener('change', () => {
+        findParent(clrPick, 'block').style.background = clrPick.value
+    })
+})
 
 const renderTask = (task, list) => {
     const existInfo = document.querySelector('.exist-info')
-    if (existInfo) existInfo.remove()
+    if (existInfo) existInfo.remove();
+    statBar.innerHTML = (`<div class="stat__open">
+    <span>открытых:  заметок</span>
+    <div class="open-bar">
+        <div class="open__line"></div>
+    </div>
+</div>
+<div class="stat__close">
+    <span>закрытых:  заметок</span>
+    <div class="close-bar">
+        <div class="close__line"></div>
+    </div>`)
 
-    const colorChoice = getColorInput()
-    console.log(colorChoice)
+        api.fetchGetStatistics()
+        .then(stat => {
+            const openLine = document.querySelector('.open__line');
+            const closeLine = document.querySelector('.close__line');
+            const openStat = document.querySelector('.stat__open span');
+            const closeStat = document.querySelector('.stat__close span');
+            openStat.textContent = `ОТКРЫТЫХ: ${stat.undone} ЗАМЕТОК`;
+            closeStat.textContent = `ЗАКРЫТЫХ: ${stat.done} ЗАМЕТОК`;
+            openLine.style.width = `${100/stat.total * stat.undone}%`
+            closeLine.style.width = `${100/stat.total * stat.done}%`
+        })
 
+    const getColorInput = () => {
+        const divColor = createEl('div', null, {
+            class: 'color'
+        });
+        Object.keys(colorArr).forEach((key) => {
+            const label = createEl('label', null, {});
+            const radioInput = createEl('input', null, {
+                type: "radio",
+                name: `${task.text}`,
+                value: `${colorArr[key]}`
+            });
+            const color = createEl('div', null, {
+                class: `${key} color-pick`
+            })
+            label.appendChild(radioInput);
+            label.appendChild(color);
+            divColor.appendChild(label);
+            if (radioInput.value === 'var(--beige)') {
+                radioInput.checked = true;
+            }
+            radioInput.addEventListener('change', () => {
+                findParent(radioInput, 'block').style.background = radioInput.value
+            })
+        })
+        return divColor
+    } //Я сделал отдельные функции для формы и тасков. Так было проще в данном случае.
 
     const li = createEl('li', null, {
         class: "col-12 col-md-6 col-lg-3 mb-4"
@@ -63,30 +134,36 @@ const renderTask = (task, list) => {
         class: 'task-desc'
     });
 
-    liObj.appendChild(taskDesc)
+
+    liObj.appendChild(taskDesc);
     liObj.appendChild(doneBtn);
     liObj.appendChild(delBtn);
-    liObj.appendChild(taskName)
-    liObj.appendChild(colorChoice)
+    liObj.appendChild(taskName);
+    liObj.appendChild(getColorInput());
 
-    li.appendChild(liObj)
+    li.appendChild(liObj);
 
     if (task.done) doneBtn.classList.toggle('done');
     list.appendChild(li)
     listCont.appendChild(list)
-    
 
-    
+
+
     doneBtn.addEventListener('click', () => {
-        api.fetchEditPost(task.id, { done: !task.done })
+        api.fetchEditPost(task.id, {
+                done: !task.done
+            })
             .then(() => {
-                list.remove()
-                renderTaskList()
+                // list.remove()
+                // renderTaskList()
+                window.location.reload() //здесь пока поставил reload, чтобы после клика статистика обновлялась. Пока не  нашел другого способа
             })
     })
 
     taskName.addEventListener('click', () => {
-        const input = createEl('input', null, {class: 'task-name'})
+        const input = createEl('input', null, {
+            class: 'task-name'
+        })
         input.type = 'text'
         input.value = task.text
         editBtn.disabled = true
@@ -105,7 +182,9 @@ const renderTask = (task, list) => {
 
 
     taskDesc.addEventListener('click', () => {
-        const textArea = createEl('textarea', null, {class: 'task-desc'})
+        const textArea = createEl('textarea', null, {
+            class: 'task-desc'
+        })
         textArea.value = task.description
         liObj.insertBefore(textArea, taskDesc)
         liObj.removeChild(taskDesc)
@@ -116,6 +195,7 @@ const renderTask = (task, list) => {
                 .then(() => {
                     list.remove()
                     renderTaskList()
+                    
                 })
         })
     })
@@ -123,8 +203,9 @@ const renderTask = (task, list) => {
     delBtn.addEventListener('click', () => {
         api.fetchDeletePost(`${task.id}`)
             .then(() => {
-                list.remove()
-                renderTaskList()
+                // list.remove()
+                // renderTaskList()
+                window.location.reload() //Тоже самое что и с doneBtn, для обновления статистики
             })
     })
 };
@@ -136,10 +217,11 @@ addBtn.addEventListener('click', () => {
             description: textArea.value
         })
         .then(() => {
-            const list = document.querySelector('#list')
-            list.remove()
+            // const list = document.querySelector('#list')
+            // list.remove()
             errorMsg.remove()
-            renderTaskList()
+            // renderTaskList()
+            window.location.reload()
         })
         .catch((err) => {
             errorMsg.appendChild(errImg);

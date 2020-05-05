@@ -56,11 +56,10 @@ li {
     width: 30px;
     height: 30px;
     background: url('../icon/done.svg');
-    opacity: 0.4;
 }
 
 .done{
-    opacity: 1;
+    background: url('../icon/done-green.svg');
 }
 
 .del-btn {
@@ -71,6 +70,10 @@ li {
     background: url('../icon/basket.svg');
 }
 
+.del-btn:hover{
+    background: url('../icon/basket-red.svg');
+}
+
 .color {
     grid-area: clr;
 }
@@ -78,6 +81,12 @@ li {
 .exist-info {
     width: 100%;
     margin-top: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.stat-info {
+    width: 100%;
     display: flex;
     justify-content: center;
 }

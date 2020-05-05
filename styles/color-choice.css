@@ -21,15 +21,30 @@ label:hover{
     cursor: pointer;
 }
 
+input[type="radio"]:checked + div {
+    border: 2px solid var(--black);
+}
+
+input[type="radio"]:checked + div {
+    border: 2px solid var(--black);
+}
+
+
 .color__check{
     width: 24px;
     height: 24px;
     border-radius: 50%;
 }
 
+.color-pick{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 3px;
+}
+
 .white{
-    background: var(--sdsa);
-    border: 2px solid var(--black);
+    background: var(--beige);
 }
 
 .pink{

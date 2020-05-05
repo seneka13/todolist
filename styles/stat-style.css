@@ -11,6 +11,7 @@
     line-height: 34px;
     text-transform: uppercase;
     color: var(--white);
+    margin-bottom: 25px;
 }
 
 .stat__bar{
@@ -41,4 +42,16 @@ span {
     text-transform: uppercase;
     color: #FFFFFF;
     padding-left: 5px;
+}
+
+.open__line{
+    height: 100%;
+    background:var(--gray);
+    width: 0px;
+}
+
+.close__line{
+    height: 100%;
+    background:var(--malachite);
+    width: 0px;
 }

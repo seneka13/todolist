@@ -23,6 +23,14 @@ export default {
             })
     },
 
+    fetchGetStatistics: () => {
+        return fetch(`${endpoint}/statistics`)
+            .then(response => {
+                if (!response.ok) throw new Error('Ошибка загрузки')
+                return response.json()
+            })
+    },
+
     fetchEditPost: (id, body) => {
         return fetch(`${endpoint}/edit/${id}`, {
             method: 'PUT',
