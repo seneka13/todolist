@@ -19,12 +19,14 @@ li {
 .li-obj {
     padding: 25px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr) 30px;
-    grid-template-rows: repeat(3, auto);
-    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-row-gap: 20px;
+    grid-column-gap: 10px;
     grid-template-areas:
         "task task done"
         "desc desc desc"
+        "err err err"
         "clr clr del";
 }
 
@@ -45,6 +47,10 @@ li {
     word-wrap: break-word;
 }
 
+.task-error{
+    grid-area: err;
+}
+
 .task-desc {
     grid-area: desc;
     word-wrap: break-word;
@@ -57,7 +63,7 @@ li {
     height: 30px;
     background: url('../icon/done.svg');
     transition: transform ease 0.2s;
-}
+    justify-self: end;}
 
 .done{
     background: url('../icon/done-green.svg');
@@ -74,6 +80,7 @@ li {
     height: 30px;
     background: url('../icon/basket.svg');
     transition: transform ease 0.2s;
+    justify-self: end;
 }
 
 .del-btn:hover{
@@ -83,6 +90,7 @@ li {
 
 .color {
     grid-area: clr;
+    display: flex;
 }
 
 .exist-info {

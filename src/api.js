@@ -18,7 +18,7 @@ export default {
     fetchGetTaskList: () => {
         return fetch(`${endpoint}/list`)
             .then(response => {
-                if (!response.ok) throw new Error('Ошибка загрузки')
+                if (!response.ok) throw new Error('Ошибка загрузки списка заметок')
                 return response.json()
             })
     },
@@ -26,7 +26,7 @@ export default {
     fetchGetStatistics: () => {
         return fetch(`${endpoint}/statistics`)
             .then(response => {
-                if (!response.ok) throw new Error('Ошибка загрузки')
+                if (!response.ok) throw new Error('Ошибка загрузки статистики')
                 return response.json()
             })
     },
@@ -40,7 +40,7 @@ export default {
             body: JSON.stringify(body)
         })
         .then(response => {
-            if (!response.ok) throw new Error('Ошибка изменения')
+            if (!response.ok) throw new Error('ошибка при редактировании')
         })
     },
 
@@ -48,7 +48,7 @@ export default {
         return fetch(`${endpoint}/delete/${id}`, {
             method: 'DELETE'
         }).then(response => {
-            if (!response.ok) throw new Error('Ошибка удаления')
+            if (!response.ok) throw new Error('ошибка при удалении')
         })
     },
 }

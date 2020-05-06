@@ -37,6 +37,7 @@
     font-size: 18px;
     line-height: 22px;
     transition: transform ease 0.3s;
+    margin-top: 20px;
 }
 
 .form__btn:focus {

@@ -24,4 +24,7 @@ export const colorArr = {
     green: 'var(--lightgreen)',
     orange: 'var(--lightorange)'
 }
+export const list = createEl('ul', null, {
+    id: 'list'
+});
 

@@ -4,25 +4,37 @@ import {
     findParent
 } from './support';
 import {
-    inputText, textArea, addBtn, listCont, errorCont, statBar, errorMsg, errorText, errImg, formColor, colorArr
+    inputText,
+    textArea,
+    addBtn,
+    listCont,
+    errorCont,
+    statBar,
+    errorMsg,
+    errorText,
+    errImg,
+    formColor,
+    colorArr,
+    list
 } from './var'
 
 
 const renderTaskList = () => {
-    const list = createEl('ul', null, {
-        id: 'list'
-    });
-    listCont.appendChild(list)
-    list.innerHTML = ('<div class="exist-info"><img src="./icon/info.svg" alt=""><span>заметок пока нет</span></div>');
-    statBar.innerHTML = ('<div class="stat-info"><span>заметок пока нет</span></div>');
+
+    listCont.appendChild(list);
+
     api.fetchGetTaskList()
-        .then(taskList => taskList.forEach((item) => renderTask(item, list)))
+        .then(taskList => {
+            list.innerHTML = ('<div class="exist-info"><img src="./icon/info.svg" alt=""><span>заметок пока нет</span></div>');
+            statBar.innerHTML = ('<div class="stat-info"><span>заметок пока нет</span></div>');
+            taskList.forEach((item) => {
+            renderTask(item, list)
+        })})
         .catch((err) => {
-            console.log(err.message)
-            const divErr = createEl('div', err.message, {
-                class: "error"
-            })
-            listCont.appendChild(divErr)
+            errorMsg.appendChild(errImg);
+            errorText.textContent = err.message;
+            errorMsg.appendChild(errorText);
+            list.appendChild(errorMsg)
         })
 };
 
@@ -61,6 +73,12 @@ const renderTask = (task, list) => {
             closeStat.textContent = `ЗАКРЫТЫХ: ${stat.done} ЗАМЕТОК`;
             openLine.style.width = `${100/stat.total * stat.undone}%`
             closeLine.style.width = `${100/stat.total * stat.done}%`
+        }).catch((err) => {
+            errorMsg.appendChild(errImg);
+            errorText.textContent = err.message;
+            errorMsg.appendChild(errorText);
+            statBar.appendChild(errorMsg)
+            console.log(errorMsg)
         })
 
     const getColorInput = () => {
@@ -111,12 +129,16 @@ const renderTask = (task, list) => {
     const taskDesc = createEl('div', task.description, {
         class: 'task-desc'
     });
+    const taskErr = createEl('div', null, {
+        class: 'task-error'
+    })
 
 
     liObj.appendChild(taskDesc);
     liObj.appendChild(doneBtn);
     liObj.appendChild(delBtn);
     liObj.appendChild(taskName);
+    liObj.appendChild(taskErr)
     liObj.appendChild(getColorInput());
 
     li.appendChild(liObj);
@@ -146,13 +168,18 @@ const renderTask = (task, list) => {
         editBtn.disabled = true
         liObj.insertBefore(input, taskName)
         liObj.removeChild(taskName)
-        input.addEventListener('blur', () => {
+        input.addEventListener('change', () => {
             api.fetchEditPost(task.id, {
                     text: input.value
                 })
                 .then(() => {
                     list.remove()
                     renderTaskList()
+                }).catch((err) => {
+                    errorMsg.appendChild(errImg);
+                    errorText.textContent = err.message;
+                    errorMsg.appendChild(errorText);
+                    taskErr.appendChild(errorMsg)
                 })
         })
     })
@@ -165,14 +192,18 @@ const renderTask = (task, list) => {
         textArea.value = task.description
         liObj.insertBefore(textArea, taskDesc)
         liObj.removeChild(taskDesc)
-        textArea.addEventListener('blur', () => {
+        textArea.addEventListener('change', () => {
             api.fetchEditPost(task.id, {
                     description: textArea.value
                 })
                 .then(() => {
                     list.remove()
                     renderTaskList()
-
+                }).catch((err) => {
+                    errorMsg.appendChild(errImg);
+                    errorText.textContent = err.message;
+                    errorMsg.appendChild(errorText);
+                    taskErr.appendChild(errorMsg)
                 })
         })
     })
@@ -182,6 +213,11 @@ const renderTask = (task, list) => {
             .then(() => {
                 list.remove()
                 renderTaskList()
+            }).catch((err) => {
+                errorMsg.appendChild(errImg);
+                errorText.textContent = err.message;
+                errorMsg.appendChild(errorText);
+                taskErr.appendChild(errorMsg)
             })
     })
 };
@@ -202,7 +238,7 @@ addBtn.addEventListener('click', () => {
             errorMsg.appendChild(errImg);
             errorText.textContent = err.message;
             errorMsg.appendChild(errorText);
-            errorCont.appendChild(errorMsg)
+            errorCont.appendChild(errorMsg);
         })
     inputText.value = '';
     textArea.value = ''
