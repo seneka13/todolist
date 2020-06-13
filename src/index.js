@@ -51,6 +51,7 @@ formColor.forEach((clrPick) => {
 const renderTask = (task, list) => {
     const existInfo = document.querySelector('.exist-info')
     if (existInfo) existInfo.remove();
+    
     statBar.innerHTML = (`<div class="stat__open">
     <span>открытых:  заметок</span>
     <div class="open-bar">
@@ -146,8 +147,6 @@ const renderTask = (task, list) => {
     if (task.done) doneBtn.classList.toggle('done');
     list.appendChild(li)
     listCont.appendChild(list)
-
-
 
     doneBtn.addEventListener('click', () => {
         api.fetchEditPost(task.id, {

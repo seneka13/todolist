@@ -48,10 +48,12 @@ span {
     height: 100%;
     background:var(--gray);
     width: 0px;
+    transition: width ease 0.3s;
 }
 
 .close__line{
     height: 100%;
     background:var(--malachite);
     width: 0px;
+    transition: width ease 0.3s;
 }
