@@ -1,3 +1,4 @@
+import './node_modules/bootstrap-4.4.1-dist/js/bootstrap.min.js';
 import api from './api'
 import {
     createEl,
